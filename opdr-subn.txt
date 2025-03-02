@@ -1,0 +1,98 @@
+               ====================
+               OPDRACHT : SUBNETTEN
+               ====================
+        (persoonlijke opgave met code x574f6f59)
+
+Instructies:
+============
+- Download dit bestand en sla het op onder de naam "opdr-subn.txt". Wijzig de bestandsnaam niet!
+- Open het bestand met een TEKST-editor (NIET met Word).
+- Vul de antwoorden in op de lijnen die starten met "ANTW1", "ANTW2", enz.
+  (Enkel de lijnen die starten met 'ANTW' worden verwerkt als antwoord.)
+  (Laat alle andere tekst, zoals je code en de opgaven gewoon staan.)
+- Upload het bestand "opdr-subn.txt" via Chamilo >> Dig.Werkomg.2 >> Sem 2 >> Opdrachten >> DW2: o1: subnetten.
+
+Tip:
+====
+- Bekijk eerst nog eens '1-netwerken-cursus.pdf' (sectie 3.1 en 3.2).
+
+Opgave 1:
+========
+Het IP-adres van een host is 10.157.136.90.
+De host zit in een subnet waarbij het HOST-gedeelte uit 4 bits bestaat.
+(Er zijn dus 14 (= 2^4 - 2) verschillende IP-adressen beschikbaar in dit subnet.)
+
+4 bits dus ipv4 = 32-4 = 28 bits
+1x"255"=3x2 tot de 8e, en 1x240 ...=28bits
+a) Geef de subnet mask die bij dit subnet hoort.
+ANTW1a= 255.255.255.240
+
+IP-adres conversie=0000 1010.1001 1101.1000 1000.0101 1010
+28 bits = /28, de eerste 28 blijven dus hetzelfde en de resterende worden
+gereset naar 0: 0000 1010.1001 1101.1000 1000.0101 0000
+dus in CIDR-notatie: 10.157.136.80/28
+
+b) Geef het netwerk-adres (de naam van het subnet) in CIDR-notatie.
+ANTW1b= 10.157.136.80/28
+
+nullen worden eentjes (de laatste 4), van host-deel
+0000 1010.1001 1101.1000 1000.0101 1111 = 10.157.136.95
+c) Geef het broadcast-IP-adres voor dit subnet.
+ANTW1c= 10.157.136.95
+
+
+10.157.136.74 =
+0000 1010.1001 1101.1000 1000.0100 1010
+terwijl 
+10.157.136.90 =
+0000 1010.1001 1101.1000 1000.0101 1010 = 1010 laatste deel,4e 1 ipv 0 
+
+d) Zit 10.157.136.74 in hetzelfde subnet? (ja/nee)
+ANTW1d= nee
+
+
+Opgave 2:
+========
+Het IP-adres van een host is 10.119.82.75.
+De host zit in een subnet waarbij het HOST-gedeelte uit 21 bits bestaat.
+(Er zijn dus 2097150 (= 2^21 - 2) verschillende IP-adressen beschikbaar in dit subnet.)
+
+ipv4=32bits in totaal-21=11bits netwerk
+11bits=1x255(2 tot de 8e)+1x"224"..rest0
+a) Geef de subnet mask die bij dit subnet hoort.
+ANTW2a= 255.224.0.0
+
+10.119.82.75  = 
+0000 1010.0111 0111.0101 0010.0100 1011
+11bits=eerste 11 behouden,rest reset naar 0
+0000 1010.0110 0000.0000 0000.0000 0000
+terug omgezet naar decimaal =
+10.96.0.0/11
+b) Geef het netwerk-adres (de naam van het subnet) in CIDR-notatie.
+ANTW2b=10.96.0.0/11
+
+
+zie vorige, ook hier worden 21bits omgezet naar 1
+dus =
+00001010.01111111.11111111.11111111
+terug omgezet naar decimaal = 
+10.127.255.255
+c) Geef het broadcast-IP-adres voor dit subnet.
+ANTW2c=10.127.255.255
+
+
+10.87.82.75 
+omzetten = 
+00001010.01010111.01010010.01001011
+en vergelijken met 
+10.119.82.75
+=
+0000 1010.0111 0111.0101 0010.0100 1011
+2e deel 3e is 1 ipv 0
+valt buiten bereik dus
+d) Zit 10.87.82.75 in hetzelfde subnet? (ja/nee)
+ANTW2d=nee
+
+
+Veel succes,
+en verlies de deadline niet uit het oog.

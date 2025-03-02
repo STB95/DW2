@@ -1,0 +1,152 @@
+                 ================
+                 OPDRACHT : REGEX
+                 ================
+        (persoonlijke opgave met code x574f6f59)
+
+Instructies:
+============
+- Download dit bestand en sla het op onder de naam "opdr-regex.txt". Wijzig de bestandsnaam niet!
+- Open het bestand met een TEKST-editor (NIET met Word).
+- Vul de antwoorden in op de lijnen die starten met "ANTW1", "ANTW2", enz.
+  (Enkel de lijnen die starten met 'ANTW' worden verwerkt als antwoord.)
+  (Laat alle andere tekst, zoals je persoonlijke code en de opgaven gewoon staan.)
+- Upload het bestand "opdr-regex.txt" via Chamilo >> Dig.Werkomg.2 >> Opdrachten >> DW2: regex.
+
+Tips:
+=====
+- Bekijk eerst nog eens de cursus (2-regex-cursus) en/of de cheatsheet (op Chamilo, onder Documenten)
+- Test je antwoorden uit met bvb. regex101.com of met de find/replace-functie van Visual Studio Code
+
+Vraag 1:
+========
+Geef 3 strings die matchen met onderstaande reguliere expressie.
+De 3 strings moeten verschillend zijn EN ze moeten zo kort mogelijk zijn.
+
+REGEX1=^w(z?)\1ak+$
+uitleg: w begin lijn, z optioneel(0-1), 1 volgen, a met min 1k, $ matcht einde van de lijn (dus precies deze regex) 
+(1a: als z 0x matcht, 1b: als z 1x matcht en dus back ref 1x z, 1c: a met min 1k? dus meerdere mogelijk, maar zo kort mogelijke string dus 2x k )
+ANTW1a=wak 
+ANTW1b=wakk 
+ANTW1c=wzzak
+
+Vraag 2:
+========
+Geef 3 strings die matchen met onderstaande reguliere expressie.
+De 3 strings moeten verschillend zijn EN ze moeten zo kort mogelijk zijn.
+
+REGEX2=^(kj|p){2}t$
+uitleg:2x kj OF 2x p in begin (OF= kan dus combi van BEIDEN zijn), t op einde 
+
+ANTW2a= ppt
+ANTW2b= pkjt
+ANTW2c= kjpt 
+
+Vraag 3:
+========
+Geef 3 strings die matchen met onderstaande reguliere expressie.
+De 3 strings moeten verschillend zijn EN ze moeten zo kort mogelijk zijn.
+
+REGEX3=^(v|[w-])$
+uitleg: v OF w,- = 1 teken, ^begin $eind
+
+ANTW3a=v
+ANTW3b=w
+ANTW3c=-
+
+Vraag 4:
+========
+Geef een ZO KORT MOGELIJKE reguliere expressie
+die volgende woorden matcht:
+
+footpad
+fanfoot
+fooster
+footway    bevat allemaal "foo" en aangezien je maar een deel van de woorden moet matchen
+foody	   simpelweg: regex "foo", en foo komt nergens voor in de NIET matchende (blacklist)
+foolish    dus zal dan ook enkel deze matchen 
+jawfoot
+prefool
+
+maar die de volgende woorden NIET matcht:
+
+Aymoro  hoofdletter = denk aan case-sensitive
+marly
+unfold
+Atlas
+forest hoofdletter
+Mahran hoofdletter
+tarrock
+hebamic
+
+Kijk eerst goed naar de matchende woorden en zoek naar een terugkerend patroon.
+Het is NIET de bedoeling dat je regex een opsomming wordt van (delen van) de matchende woorden.
+
+ANTW4=foo
+
+Vraag 5: 
+========
+Geef een ZO KORT MOGELIJKE reguliere expressie
+die volgende woorden matcht:
+
+purpuraceous   2x pur  (telkens min 3 chars die herhaald worden)
+trisectrix    2x tri    
+testes          2x tes
+calelectrical    2x cal
+anticovenanting    2x anti     	\w=word char komt overeen met a-z,A-z,0-9 en special letters "_"
+				en dit komt 2x voor 
+monoammonium      2x mon	{3,}=min 3chars die x keer matcht echter zo KORT mogelijk dus 
+				 2 ipv 3 (niet 1 want dan klopt het niet met de niet match)    
+untaunted       2x unt		backref=*\1 want die 2chars in de () moeten 2x voorkomen	
+photophonic     2x pho		()=groeperen tot 1 geheel, moet dus exact hiermee matchen
+				{2,}=selecteert alles dat MIN 2x voorkomt (n=2)						 	(backref=numerieke ref, matcht met eerste deel in de (), en 
+ 				hier is er maar 1x(..)groep dus enkel \1
+				
+maar die de volgende woorden NIET matcht:
+
+parsonage
+hypergoddess    komen geen dubbels in voor
+anticker
+foxtailed
+pouchlike
+corundum
+damnably
+presumptuously
+
+Kijk eerst goed naar de matchende woorden en zoek naar een terugkerend patroon.
+(Tip: 'ABCxyzABC' zou ook matchen)
+Het is NIET de bedoeling dat je regex een opsomming wordt van (delen van) de matchende woorden.
+
+ANTW5=(\w{2,})\w*\1
+
+Vraag 6: (lees eerst sectie 6 van 2-regex-cursus.pdf nog eens door)
+========
+Geef een find/replace-expressie die in 1 keer alle strings die met "www" beginnen en uit 3 delen bestaan
+(bvb. "www.blabla.blabla") vervangt door een hyperlink (in HTML). 
+
+zie oefeningen regex cursus
+
+REDENERING: 
+\b=word boundary (begin en einde aanduiden, wat er tussen staat = is wat er enkel mag naar
+gezocht worden?)
+www\. = www. (backslash verwijderd speciale betekenis, . is gwn .)
+1 of meerdere chars(letters,cijfers) matchen dus één van de volgende chars= [A-Za-z0-9] en 
++ want kan 1 of meerdere keren hiermee matchen bv bla (3x, b,l,a)
+nadien willen we de domeinnaam afsluiten met een . dus weer "\." en dan komt de 
+extensie die NIET uit cijfers kan bestaan (denk ik?) dus enkel letters [A-za-z] maar de extensie 
+bestaat maar uit een paar chars, ik denk aan com, net, org, be, nl.. dus min uit 2 char dus uit 
+voorgaande, moet er MIN 2x een match zijn: {2,} (er is geen MAX want de extensie kan volgens mij ook langer zijn dan de opgesomde)
+DUSSS
+(zie oef 3)
+ANTW6-FIND=\b(www\.[A-Za-z0-9]+\.[A-Za-z]{2,})\b
+
+
+Vervang bijvoorbeeld
+"Meer info vind je op www.openai.com en www.chat.org!" door
+"Meer info vind je op <a href="http://www.openai.com/">www.openai.com</a> en <a href="http://www.chat.org/">www.chat.org</a>!"
+REDENERING: 
+hyperlink = <a href= "URL">URL</a>
+URL= "http://$1" 
+waarvan $1 verwijst naar de gevangen groep in (), er is maar 1 groep hier
+ANTW6-REPLACE=<a href="http://$1/">$1</a>
+
+
