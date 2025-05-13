@@ -1,17 +1,18 @@
-
-
-###DEEL 01: INSTRUCTIES VOOR BUILDEN IMAGE
-
+# DEEL 1: IMAGE BUILD-INSTRUCTIES
 FROM ubuntu:20.04
-#We starten vanaf deze "ubuntu" image met de tag 20.04 (dockhub)
 
-RUN apt update
-RUN apt install apache2 -y
+RUN apt update 
+RUN apt install apache2 -y 
+RUN apt clean
 
-COPY html /var/www/html
+# Maak uwen buildtime.txt aan tijdens dat de image aan het builden is
+RUN echo "$(date -u)" > /var/www/html/buildtime.txt
 
-### PSST. DEZE CONTAINER DRAAIT OP POORT 80 (zie Dockerfile)
-EXPOSE 80 
+# Kopieer lokale HTML-bestanden naar de juiste locatie in de container
+COPY html/ /var/www/html/
+
+# DEEL 2: CONTAINER RUNTIME-INSTRUCTIES
+WORKDIR /home/ubuntu/
+EXPOSE 80/tcp
+
 CMD service apache2 start && bash
-
-
