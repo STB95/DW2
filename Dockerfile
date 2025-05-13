@@ -1,6 +1,9 @@
 # DEEL 1: IMAGE BUILD-INSTRUCTIES
 FROM ubuntu:20.04
 
+# voorkom interactieve vragen waarbij je moet antwoorden, skip die 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt update 
 RUN apt install apache2 -y 
 RUN apt clean
